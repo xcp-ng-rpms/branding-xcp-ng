@@ -1,27 +1,30 @@
 Name:           branding-xcp-ng
 Version:        8.3.0
-Release:        1
+Release:        2
 Summary:        XCP-ng branding
 License:        ISC
-URL:            https://github.com/xcp-ng/branding-xcp-ng
-Source0:        https://github.com/xcp-ng/branding-xcp-ng/archive/v%{version}/branding-xcp-ng-%{version}.tar.gz
+URL:            https://github.com/xcp-ng-rpms/branding-xcp-ng
+
+Source0:        branding
+Source1:        EULA
+Source2:        LICENSES
+Source3:        branding-compile.py
+Source4:        brand-directory.py
+
 BuildArch:      noarch
 Requires:       python
 
 %description
 This package contains branding information for XCP-ng.
 
-%prep
-%autosetup -p1
-
 %build
 
 %install
-%{__install} -D -m 0644 branding/branding            %{buildroot}%{_usrsrc}/branding/branding
-%{__install} -D -m 0755 branding/brand-directory.py  %{buildroot}%{_usrsrc}/branding/brand-directory.py
-%{__install} -D -m 0755 branding/branding-compile.py %{buildroot}%{_usrsrc}/branding/branding-compile.py
-%{__install} -D -m 0644 branding/EULA                %{buildroot}%{_usrsrc}/branding/EULA
-%{__install} -D -m 0644 branding/LICENSES            %{buildroot}%{_usrsrc}/branding/LICENSES
+%{__install} -D -m 0644 %{SOURCE0} %{buildroot}%{_usrsrc}/branding/branding
+%{__install} -D -m 0755 %{SOURCE4} %{buildroot}%{_usrsrc}/branding/brand-directory.py
+%{__install} -D -m 0755 %{SOURCE3} %{buildroot}%{_usrsrc}/branding/branding-compile.py
+%{__install} -D -m 0644 %{SOURCE1} %{buildroot}%{_usrsrc}/branding/EULA
+%{__install} -D -m 0644 %{SOURCE2} %{buildroot}%{_usrsrc}/branding/LICENSES
 
 %files
 %{_usrsrc}/branding/branding
@@ -33,6 +36,9 @@ This package contains branding information for XCP-ng.
 %exclude %{_usrsrc}/branding/*.pyo
 
 %changelog
+* Wed Feb 01 2023 Yann Dirson <yann.dirson@vates.fr> - 8.3.0-2
+- Remove usage of "upstream" tarball to avoid versionning confusion
+
 * Thu Sep 01 2022 Samuel Verschelde <stormi-xcp@ylix.fr> - 8.3.0-1
 - Update for XCP-ng 8.3.0
 
