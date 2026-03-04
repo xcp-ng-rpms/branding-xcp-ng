@@ -1,7 +1,7 @@
 Name:           branding-xcp-ng
 Version:        8.99.0
 # When increasing the first number, also update the hash if needed
-Release:        1.e3c0359
+Release:        1.e3c0359~ydi.1
 Summary:        XCP-ng branding
 License:        ISC
 URL:            https://github.com/xcp-ng/branding-xcp-ng
